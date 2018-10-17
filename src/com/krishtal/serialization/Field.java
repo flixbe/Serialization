@@ -8,7 +8,11 @@ public class Field {
 	public byte type;
 	public byte[] data;
 	public byte[] name;
-	public short nameLength;	
+	public short nameLength;
+	
+	private Field() {
+		
+	}
 	
 	public void setName(String name) {
 		assert(name.length() < Short.MAX_VALUE);	
@@ -29,7 +33,7 @@ public class Field {
 		pointer = writeBytes(dest, pointer, type);
 		pointer = writeBytes(dest, pointer, data);
 		return pointer;
-	}	
+	}
 	
 	public static Field Byte(String name, byte value) {
 		Field field = new Field();
