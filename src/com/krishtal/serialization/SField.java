@@ -2,7 +2,7 @@ package com.krishtal.serialization;
 
 import static com.krishtal.serialization.SerializationWriter.*;
 
-public class Field {
+public class SField {
 	
 	public static final byte CONTAINER_TYPE = ContainerType.FIELD;
 	public byte type;
@@ -10,7 +10,7 @@ public class Field {
 	public byte[] name;
 	public short nameLength;
 	
-	private Field() {
+	private SField() {
 		
 	}
 	
@@ -35,8 +35,8 @@ public class Field {
 		return pointer;
 	}
 	
-	public static Field Byte(String name, byte value) {
-		Field field = new Field();
+	public static SField Byte(String name, byte value) {
+		SField field = new SField();
 		field.setName(name);
 		field.type = Type.BYTE;
 		field.data = new byte[Type.getSize(Type.BYTE)];
@@ -44,8 +44,8 @@ public class Field {
 		return field;
 	}
 	
-	public static Field Short(String name, short value) {
-		Field field = new Field();
+	public static SField Short(String name, short value) {
+		SField field = new SField();
 		field.setName(name);
 		field.type = Type.SHORT;
 		field.data = new byte[Type.getSize(Type.SHORT)];
@@ -53,8 +53,8 @@ public class Field {
 		return field;
 	}
 	
-	public static Field Char(String name, char value) {
-		Field field = new Field();
+	public static SField Char(String name, char value) {
+		SField field = new SField();
 		field.setName(name);
 		field.type = Type.CHAR;
 		field.data = new byte[Type.getSize(Type.CHAR)];
@@ -62,8 +62,8 @@ public class Field {
 		return field;
 	}
 	
-	public static Field Integer(String name, int value) {
-		Field field = new Field();
+	public static SField Integer(String name, int value) {
+		SField field = new SField();
 		field.setName(name);
 		field.type = Type.INT;
 		field.data = new byte[Type.getSize(Type.INT)];
@@ -71,8 +71,8 @@ public class Field {
 		return field;
 	}
 	
-	public static Field Long(String name, long value) {
-		Field field = new Field();
+	public static SField Long(String name, long value) {
+		SField field = new SField();
 		field.setName(name);
 		field.type = Type.LONG;
 		field.data = new byte[Type.getSize(Type.LONG)];
@@ -80,8 +80,8 @@ public class Field {
 		return field;
 	}
 	
-	public static Field Float(String name, float value) {
-		Field field = new Field();
+	public static SField Float(String name, float value) {
+		SField field = new SField();
 		field.setName(name);
 		field.type = Type.FLOAT;
 		field.data = new byte[Type.getSize(Type.FLOAT)];
@@ -89,8 +89,8 @@ public class Field {
 		return field;
 	}
 	
-	public static Field Double(String name, double value) {
-		Field field = new Field();
+	public static SField Double(String name, double value) {
+		SField field = new SField();
 		field.setName(name);
 		field.type = Type.DOUBLE;
 		field.data = new byte[Type.getSize(Type.DOUBLE)];
@@ -98,8 +98,8 @@ public class Field {
 		return field;
 	}
 	
-	public static Field Boolean(String name, boolean value) {
-		Field field = new Field();
+	public static SField Boolean(String name, boolean value) {
+		SField field = new SField();
 		field.setName(name);
 		field.type = Type.BOOLEAN;
 		field.data = new byte[Type.getSize(Type.BOOLEAN)];
