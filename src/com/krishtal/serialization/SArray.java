@@ -5,12 +5,13 @@ import static com.krishtal.serialization.SerializationWriter.writeBytes;
 public class SArray {
 
 	public static final byte CONTAINER_TYPE = ContainerType.ARRAY;
-	public int count;
-	public byte type;
-	public byte[] data;
 	public byte[] name;
 	public short nameLength;
-	
+	public byte[] data;
+	public byte type;
+	public int count;
+	public int size = 1 + 2 + 4 + 1 + 4;
+
 	private short[] shortData;
 	private char[] charData;
 	private int[] intData;
@@ -20,13 +21,21 @@ public class SArray {
 	private boolean[] booleanData;
 	
 	public SArray() {
-		
 	}
 	
 	public void setName(String name) {
-		assert(name.length() < Short.MAX_VALUE);	
-		nameLength = (short) name.length();
+		assert(name.length() < Short.MAX_VALUE);
+		
+		if (this.name != null)
+			size -= this.name.length;
+		
+		nameLength = (short)name.length();
 		this.name = name.getBytes();
+		size += nameLength;
+	}
+	
+	private void updateSize() {
+		size += getDataSize();
 	}
 	
 	public int getBytes(byte[] dest, int pointer) {
@@ -65,7 +74,7 @@ public class SArray {
 	}
 	
 	public int getSize() {		
-		return 1 + 2 + name.length + 1 + 4 + getDataSize();
+		return size;
 	}
 	
 	public int getDataSize() {
@@ -96,6 +105,7 @@ public class SArray {
 		array.type = Type.BYTE;
 		array.count = data.length;
 		array.data = data;
+		array.updateSize();
 		return array;
 	}
 	
@@ -104,7 +114,8 @@ public class SArray {
 		array.setName(name);
 		array.type = Type.SHORT;
 		array.count = data.length;
-		array.shortData = data;		
+		array.shortData = data;
+		array.updateSize();
 		return array;
 	}
 	
@@ -114,6 +125,7 @@ public class SArray {
 		array.type = Type.CHAR;
 		array.count = data.length;
 		array.charData = data;
+		array.updateSize();
 		return array;
 	}
 	
@@ -122,7 +134,8 @@ public class SArray {
 		array.setName(name);
 		array.type = Type.INT;
 		array.count = data.length;
-		array.intData = data;		
+		array.intData = data;
+		array.updateSize();
 		return array;
 	}
 	
@@ -131,7 +144,8 @@ public class SArray {
 		array.setName(name);
 		array.type = Type.LONG;
 		array.count = data.length;
-		array.longData = data;		
+		array.longData = data;
+		array.updateSize();
 		return array;
 	}
 	
@@ -140,7 +154,8 @@ public class SArray {
 		array.setName(name);
 		array.type = Type.FLOAT;
 		array.count = data.length;
-		array.floatData = data;		
+		array.floatData = data;
+		array.updateSize();
 		return array;
 	}
 	
@@ -150,6 +165,7 @@ public class SArray {
 		array.type = Type.DOUBLE;
 		array.count = data.length;
 		array.doubleData = data;
+		array.updateSize();
 		return array;
 	}
 	
@@ -159,6 +175,7 @@ public class SArray {
 		array.type = Type.DOUBLE;
 		array.count = data.length;
 		array.booleanData = data;
+		array.updateSize();
 		return array;
 	}
 	

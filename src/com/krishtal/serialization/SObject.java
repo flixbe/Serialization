@@ -11,7 +11,7 @@ public class SObject {
 	public short nameLength;
 	public byte[] name;
 
-	private int size = 1 + 2 + 2 + 2;
+	private int size = 1 + 2 + 4 + 2 + 2;
 	
 	private short fieldCount;
 	private short arrayCount;
@@ -56,6 +56,7 @@ public class SObject {
 		pointer = writeBytes(dest, pointer, CONTAINER_TYPE);
 		pointer = writeBytes(dest, pointer, nameLength);
 		pointer = writeBytes(dest, pointer, name);
+		pointer = writeBytes(dest, pointer, size);
 		
 		pointer = writeBytes(dest, pointer, fieldCount);
 		for (SField field : fields)
